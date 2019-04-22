@@ -1,3 +1,9 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Guess The Car</string>
+    <string name="main_score_label">Score: <xliff:g id="score_amount" example="0">%o</xliff:g></string>
+    <string name="main_question_label">Question</string>
+    <string name="main_questions_left_label">Questions left: <xliff:g id="remaining_questions" example="5">%o</xliff:g></string>
+    <string name="main_correct_message">Answer is correct</string>
+    <string name="main_incorrect_message">Answer is incorrect</string>
+    <string name="main_reset_label">Reset</string>
 </resources>

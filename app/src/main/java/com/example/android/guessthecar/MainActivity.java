@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         displayQuestion(0);
         displayScore();
         displayQuestionsLeft();
+        enableAnswerButtons(true);
     }
 
     public void reset(View view) {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         displayQuestion(0);
         displayScore();
         displayQuestionsLeft();
+        enableAnswerButtons(true);
     }
 
     public void validateAnswer(View view) {
@@ -69,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
             String message;
             if (isValid) {
                 score++;
-                message = "Answer is correct";
+                message = getString(R.string.main_correct_message);
             } else {
-                message = "Answer is incorrect";
+                message = getString(R.string.main_incorrect_message);
             }
 
             displayScore();
@@ -82,23 +84,38 @@ public class MainActivity extends AppCompatActivity {
 
             if (currentQuestionLocation == questions.size() - 1) {
                 resetButton.setVisibility(View.VISIBLE);
+                enableAnswerButtons(false);
             }
         }
     }
 
+    private void enableAnswerButtons(boolean value) {
+        Button answer0Button = findViewById(R.id.button_main_answer_0);
+        answer0Button.setEnabled(value);
+
+        Button answer1Button = findViewById(R.id.button_main_answer_1);
+        answer1Button.setEnabled(value);
+
+        Button answer2Button = findViewById(R.id.button_main_answer_2);
+        answer2Button.setEnabled(value);
+
+        Button answer3Button = findViewById(R.id.button_main_answer_3);
+        answer3Button.setEnabled(value);
+    }
+
     private void displayScore() {
         TextView scoreTextView = findViewById(R.id.textView_main_score);
-        scoreTextView.setText("Score: " + score);
+        scoreTextView.setText(getString(R.string.main_score_label, score));
     }
 
     private void displayQuestionNo() {
         TextView questionNoTextView = findViewById(R.id.textView_main_question_no);
-        questionNoTextView.setText("Question " + (currentQuestionLocation + 1));
+        questionNoTextView.setText(getString(R.string.main_question_label) + " " + (currentQuestionLocation + 1));
     }
 
     private void displayQuestionsLeft() {
         TextView questionsLeftTextView = findViewById(R.id.textView_main_questions_left);
-        questionsLeftTextView.setText("Question left: " + (questions.size() - currentQuestionLocation - 1));
+        questionsLeftTextView.setText(getString(R.string.main_questions_left_label, (questions.size() - currentQuestionLocation - 1)));
     }
 
     private void displayQuestion(int location) {
@@ -106,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         displayQuestionsLeft();
 
         TextView questionsLeftTextView = findViewById(R.id.textView_main_questions_left);
-        questionsLeftTextView.setText("Question left: " + (questions.size() - location - 1));
+        questionsLeftTextView.setText(getString(R.string.main_questions_left_label, (questions.size() - location - 1)));
 
         Question question = questions.get(location);
         Answer[] answers = question.getAnswers();
